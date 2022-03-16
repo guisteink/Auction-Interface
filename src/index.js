@@ -1,24 +1,27 @@
-import { ColorModeScript } from '@chakra-ui/react';
-import React, { StrictMode } from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import * as serviceWorker from './serviceWorker';
+import React from 'react';
+import ReactDOM from "react-dom";
+import { HashRouter, Route, Switch } from "react-router-dom";
+import { ChakraProvider } from '@chakra-ui/react';
+import theme from "./theme/theme";
+import AllAuctions from "./views/free/all-auctions";
+import Signin from "./views/auth/signin";
+import Signup from "./views/auth/signup";
+// import { ColorModeSwitcher } from './ColorModeSwitcher';
 
 ReactDOM.render(
-  <StrictMode>
-    <ColorModeScript />
-    <App />
-  </StrictMode>,
-  document.getElementById('root')
+  <ChakraProvider theme={theme}>
+    <HashRouter>
+      <Switch>
+        <Route path={`/`} component={AllAuctions} />
+        <Route path={`/signin`} component={Signin} />
+        <Route path={`/signup`} component={Signup} />
+      </Switch>
+    </HashRouter>
+
+    {/* <Box textAlign="center" fontSize="xl">
+        <Grid minH="100vh" p={3}>
+          <ColorModeSwitcher justifySelf="flex-end" />
+        </Grid>
+      </Box> */}
+  </ChakraProvider>
 );
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://cra.link/PWA
-serviceWorker.unregister();
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
