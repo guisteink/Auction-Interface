@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from "react-dom";
-import { HashRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ChakraProvider } from '@chakra-ui/react';
 import theme from "./theme/theme";
 import AllAuctions from "./views/free/all-auctions";
@@ -10,18 +10,19 @@ import Signup from "./views/auth/signup";
 
 ReactDOM.render(
   <ChakraProvider theme={theme}>
-    <HashRouter>
-      <Switch>
-        <Route path={`/`} component={AllAuctions} />
-        <Route path={`/signin`} component={Signin} />
-        <Route path={`/signup`} component={Signup} />
-      </Switch>
-    </HashRouter>
+    <BrowserRouter>
+      <Routes>
+        <Route path={'/'} element={<AllAuctions />} />
+        <Route path={`/signin`} element={Signin} />
+        <Route path={`/signup`} element={Signup} />
+      </Routes>
+    </BrowserRouter>
 
     {/* <Box textAlign="center" fontSize="xl">
         <Grid minH="100vh" p={3}>
           <ColorModeSwitcher justifySelf="flex-end" />
         </Grid>
       </Box> */}
-  </ChakraProvider>
+  </ChakraProvider>,
+  document.getElementById('root')
 );
