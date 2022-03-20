@@ -12,7 +12,7 @@ import
   MenuItem,
   MenuDivider,
   useDisclosure,
-  useColorModeValue,
+  useColorModeValue, Text,
   Stack,
   useColorMode,
   Center,
@@ -42,8 +42,7 @@ export default function Nav()
     <>
       <Box w={'100%'} bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
-          <Box>Logo AQUI</Box>
-
+          <Text isTruncated fontSize='4xl' color={'white'} fontWeight='bold' textShadow={"1px 1px 1px black"}>AUCTIONS</Text>
           <Flex alignItems={'center'}>
             <Stack direction={'row'} spacing={7}>
               <Button onClick={toggleColorMode}>
