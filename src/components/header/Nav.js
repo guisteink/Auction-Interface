@@ -50,14 +50,14 @@ export default function Nav()
               </Button>
               <Button
                 as={'a'}
-                fontSize={'sm'}
+                fontSize={'2xl'}
                 fontWeight={400}
                 variant={'link'}
                 href={'#'}>
                 Sign In
               </Button>
-              <Button
-                fontSize={'sm'}
+              {/* <Button textShadow={"1px 1px 1px black"}
+                fontSize={'2xl'}
                 fontWeight={600}
                 color={'white'}
                 bg={'pink.400'}
@@ -66,7 +66,7 @@ export default function Nav()
                   bg: 'pink.300',
                 }}>
                 Sign Up
-              </Button>
+              </Button> */}
 
               {/* <Menu>
                 <MenuButton
