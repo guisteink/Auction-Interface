@@ -7,17 +7,7 @@ export default function Footer(props)
 {
   return (
     <Flex
-      flexDirection={{
-        base: "column",
-        xl: "row",
-      }}
-      alignItems={{
-        base: "center",
-        xl: "start",
-      }}
-      justifyContent='center'
-      px='30px'
-      pb='20px'>
+      p="50px 0px 20px 0px" flexDirection={{ base: "column", xl: "row", }} alignItems={{ base: "center", xl: "start", }} justifyContent='center'>
       <Text
         color='gray.400'
         textAlign={{
@@ -25,56 +15,15 @@ export default function Footer(props)
           xl: "start",
         }}
         mb={{ base: "20px", xl: "0px" }}>
-        &copy; {1900 + new Date().getYear()}{" "}
+        {1900 + new Date().getYear()}
+        {" - "}
         <Link
           color='blue.400'
-          href='https://grupofioforte.com'
+          href='https://github.com/guisteink'
           target='_blank'>
-          {"by Grupo Fioforte"}
+          {"Guilherme Stein"}
         </Link>
       </Text>
-      {/* <List display='flex'>
-        <ListItem
-          me={{
-            base: "20px",
-            md: "44px",
-          }}>
-          <Link color='gray.400' href='https://www.creative-tim.com'>
-            {document.documentElement.dir === "rtl"
-              ? "توقيت الإبداعية"
-              : "Creative Tim"}
-          </Link>
-        </ListItem>
-        <ListItem
-          me={{
-            base: "20px",
-            md: "44px",
-          }}>
-          <Link color='gray.400' href='https://www.simmmple.com'>
-            {document.documentElement.dir === "rtl" ? "سيممبل" : "Simmmple"}
-          </Link>
-        </ListItem>
-        <ListItem
-          me={{
-            base: "20px",
-            md: "44px",
-          }}>
-          <Link
-            color='gray.400'
-            href='#blog'
-            href='https://creative-tim.com/blog'>
-            {document.documentElement.dir === "rtl" ? "مدونة" : "Blog"}
-          </Link>
-        </ListItem>
-        <ListItem>
-          <Link
-            color='gray.400'
-            href='#license'
-            href='https://www.creative-tim.com/license'>
-            {document.documentElement.dir === "rtl" ? "رخصة" : "License"}
-          </Link>
-        </ListItem>
-      </List> */}
     </Flex>
   );
 }

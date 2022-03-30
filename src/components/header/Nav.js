@@ -11,27 +11,31 @@ import
   MenuList,
   MenuItem,
   MenuDivider,
+  MenuItemOption,
+  MenuGroup,
+  MenuOptionGroup,
   useDisclosure,
   useColorModeValue, Text,
   Stack,
   useColorMode,
   Center,
 } from '@chakra-ui/react';
-import { MoonIcon, SunIcon } from '@chakra-ui/icons';
-
-const NavLink = ({ children }) => (
-  <Link
-    px={2}
-    py={1}
-    rounded={'md'}
-    _hover={{
-      textDecoration: 'none',
-      bg: useColorModeValue('gray.200', 'gray.700'),
-    }}
-    href={'#'}>
-    {children}
-  </Link>
-);
+import { MoonIcon, SunIcon, SettingsIcon, ArrowForwardIcon } from '@chakra-ui/icons';
+import
+{
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Input,
+  InputGroup,
+  InputLeftElement,
+} from '@chakra-ui/react'
+import isAuthenticated from '../../helpers/isAuth'
+import { AiOutlineUser, AiFillLock } from "react-icons/ai";
 
 export default function Nav()
 {
@@ -41,21 +45,79 @@ export default function Nav()
   return (
     <>
       <Box w={'100%'} bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
+
+        <Modal isOpen={isOpen} onClose={onClose} size={'xl'} >
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Sign In</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <Flex direction='column' justify="start">
+                <Flex direction='row' m="3px 0px">
+                  <InputGroup>
+                    <InputLeftElement
+                      pointerEvents='none'
+                      children={<AiOutlineUser color='gray.300' />}
+                    />
+                    <Input variant='filled' placeholder='example.auction@gmail.com' />
+                  </InputGroup>
+                </Flex>
+                <Flex direction='row' m="3px 0px">
+                  <InputGroup>
+                    <InputLeftElement
+                      pointerEvents='none'
+                      children={<AiFillLock color='gray.300' />}
+                    />
+                    <Input variant='filled' placeholder='example' />
+                  </InputGroup>
+                </Flex>
+                <Flex m="5px 0px" direction='row' justify='end'>
+                  <Text color="gray">Ps: the above placeholder information works for testing</Text>
+                </Flex>
+              </Flex>
+            </ModalBody>
+            <ModalFooter justify="space-between">
+              <Button colorScheme='blue' mr={3} onClick={onClose}>
+                Sign in
+              </Button>
+              <Button colorScheme='blue' onClick={onClose}>
+                Close
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
-          <Text isTruncated fontSize='4xl' color={'white'} fontWeight='bold' textShadow={"1px 1px 1px black"}>AUCTIONS</Text>
+          <Text ml={"10px"} isTruncated fontSize='4xl' color={'white'} fontWeight='bold' textShadow={"1px 1px 1px black"}>AUCTIONS HOUSE</Text>
           <Flex alignItems={'center'}>
-            <Stack direction={'row'} spacing={7}>
+            <Stack direction={'row'} spacing={3}>
+              {isAuthenticated() ?
+                <Menu align="center">
+                  <MenuButton as={Button} rightIcon={<SettingsIcon />}>
+                    Olá, Example
+                  </MenuButton>
+                  <MenuList>
+                    <MenuItem>New auction</MenuItem>
+                    <MenuItem>My items</MenuItem>
+                    <MenuItem>Signout</MenuItem>
+                  </MenuList>
+                </Menu>
+
+                :
+                <Menu align="center">
+                  <MenuButton
+                    rightIcon={<ArrowForwardIcon />}
+                    as={Button}
+                    onClick={onOpen}
+                  >
+                    Sign In
+                  </MenuButton>
+                </Menu>
+              }
               <Button onClick={toggleColorMode}>
-                {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+                {colorMode === 'dark' ? <MoonIcon /> : <SunIcon />}
               </Button>
-              <Button
-                as={'a'}
-                fontSize={'2xl'}
-                fontWeight={400}
-                variant={'link'}
-                href={'#'}>
-                Sign In
-              </Button>
+
               {/* <Button textShadow={"1px 1px 1px black"}
                 fontSize={'2xl'}
                 fontWeight={600}
@@ -101,6 +163,7 @@ export default function Nav()
             </Stack>
           </Flex>
         </Flex>
+
       </Box>
     </>
   );
