@@ -174,10 +174,11 @@ export default function AllAuctions()
                             <ModalFooter justify="space-between">
                                 <InputGroup pr="10px">
                                     <InputLeftElement
+                                        color="white"
                                         pointerEvents='none'
                                         children={"R$"}
                                     />
-                                    <Input variant='filled' value={bidValue} onChange={(e) => setBidValue(e.target.value)} />
+                                    <Input color="white" variant='filled' value={bidValue} onChange={(e) => setBidValue(e.target.value)} />
                                 </InputGroup>
 
                                 <Button bg={"red.400"} mr={3} color="white" textShadow={"1px 1px 1px black"}>

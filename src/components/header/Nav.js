@@ -1,28 +1,16 @@
-import { ReactNode } from 'react';
 import
 {
   Box,
   Flex,
-  Avatar,
-  Link,
   Button,
   Menu,
   MenuButton,
   MenuList,
   MenuItem,
-  MenuDivider,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
   useDisclosure,
   useColorModeValue, Text,
   Stack,
   useColorMode,
-  Center,
-} from '@chakra-ui/react';
-import { MoonIcon, SunIcon, SettingsIcon, ArrowForwardIcon } from '@chakra-ui/icons';
-import
-{
   Modal,
   ModalOverlay,
   ModalContent,
@@ -33,19 +21,38 @@ import
   Input,
   InputGroup,
   InputLeftElement,
-} from '@chakra-ui/react'
+} from '@chakra-ui/react';
+import { MoonIcon, SunIcon, SettingsIcon, ArrowForwardIcon } from '@chakra-ui/icons';
 import isAuthenticated from '../../helpers/isAuth'
 import { AiOutlineUser, AiFillLock } from "react-icons/ai";
+import api from '../../services/api'
 
 export default function Nav()
 {
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const handleLogin = async () =>
+  {
+    try {
+      const result = api.login({
+        client_id: "TCDnOR565OfSJrQzsTrNfs8IxySvlguB",
+        username: "guilherme.steink@gmail.com",
+        password: "Aspiree15!!!",
+        grant_type: "password",
+        scope: 'openid'
+      })
+
+      console.log("result", result)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+
   return (
     <>
       <Box w={'100%'} bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
-
         <Modal isOpen={isOpen} onClose={onClose} size={'xl'} >
           <ModalOverlay />
           <ModalContent>
@@ -59,7 +66,7 @@ export default function Nav()
                       pointerEvents='none'
                       children={<AiOutlineUser color='gray.300' />}
                     />
-                    <Input variant='filled' placeholder='example.auction@gmail.com' />
+                    <Input value="guilherme.steink@gmail.com" type="email" variant='filled' placeholder='example.auction@gmail.com' />
                   </InputGroup>
                 </Flex>
                 <Flex direction='row' m="3px 0px">
@@ -68,7 +75,7 @@ export default function Nav()
                       pointerEvents='none'
                       children={<AiFillLock color='gray.300' />}
                     />
-                    <Input variant='filled' placeholder='example' />
+                    <Input value="Aspiree15!!!" type="password" variant='filled' placeholder='example' />
                   </InputGroup>
                 </Flex>
                 <Flex m="5px 0px" direction='row' justify='end'>
@@ -77,7 +84,7 @@ export default function Nav()
               </Flex>
             </ModalBody>
             <ModalFooter justify="space-between">
-              <Button colorScheme='blue' mr={3} onClick={onClose}>
+              <Button colorScheme='blue' mr={3} onClick={handleLogin}>
                 Sign in
               </Button>
               <Button colorScheme='blue' onClick={onClose}>
@@ -102,7 +109,6 @@ export default function Nav()
                     <MenuItem>Signout</MenuItem>
                   </MenuList>
                 </Menu>
-
                 :
                 <Menu align="center">
                   <MenuButton
